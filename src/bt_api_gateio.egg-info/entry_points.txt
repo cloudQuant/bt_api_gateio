@@ -1,0 +1,2 @@
+[bt_api.plugins]
+gateio = bt_api_gateio.plugin:register_plugin

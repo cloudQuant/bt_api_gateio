@@ -1,0 +1,15 @@
+"""Tests for GateioExchangeData container."""
+
+from __future__ import annotations
+
+from bt_api_gateio.exchange_data import GateioExchangeData
+
+
+class TestGateioExchangeData:
+    """Tests for GateioExchangeData."""
+
+    def test_init(self):
+        """Test initialization."""
+        exchange = GateioExchangeData()
+
+        assert exchange.exchange_name == "gateio"
