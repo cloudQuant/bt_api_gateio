@@ -2,14 +2,15 @@ from __future__ import annotations
 
 from typing import Any
 
+from bt_api_base.functions.utils import update_extra_data
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_gateio.containers.balances.gateio_balance import GateioBalanceData
-from bt_api_gateio.exchange_data.gateio_exchange_data import GateioExchangeDataSwap
 from bt_api_gateio.containers.orderbooks.gateio_orderbook import GateioOrderBookData
 from bt_api_gateio.containers.orders.gateio_order import GateioOrderData
 from bt_api_gateio.containers.tickers.gateio_ticker import GateioTickerData
+from bt_api_gateio.exchange_data.gateio_exchange_data import GateioExchangeDataSwap
 from bt_api_gateio.feeds.live_gateio.request_base import GateioRequestData
-from bt_api_base.functions.utils import update_extra_data
-from bt_api_base.logging_factory import get_logger
 
 
 class GateioRequestDataSwap(GateioRequestData):

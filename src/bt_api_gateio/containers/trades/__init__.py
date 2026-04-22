@@ -1,8 +1,8 @@
 from bt_api_gateio.containers.trades.gateio_trade import (
-    GateioTradeData,
     GateioRequestTradeData,
-    GateioWssTradeData,
+    GateioTradeData,
     GateioTradeHistory,
+    GateioWssTradeData,
 )
 
 __all__ = ["GateioTradeData", "GateioRequestTradeData", "GateioWssTradeData", "GateioTradeHistory"]

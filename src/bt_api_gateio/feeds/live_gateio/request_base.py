@@ -12,12 +12,13 @@ import time
 from typing import Any
 from urllib.parse import urlencode
 
-from bt_api_gateio.exchange_data.gateio_exchange_data import GateioExchangeDataSpot
 from bt_api_base.containers.requestdatas.request_data import RequestData
 from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule
+
+from bt_api_gateio.exchange_data.gateio_exchange_data import GateioExchangeDataSpot
 
 
 class GateioRequestData(Feed, RequestData):

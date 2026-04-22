@@ -1,6 +1,6 @@
 from bt_api_gateio.containers.tickers.gateio_ticker import (
-    GateioTickerData,
     GateioRequestTickerData,
+    GateioTickerData,
     GateioWssTickerData,
 )
 

@@ -41,13 +41,16 @@ pip install -e .
 ### Quick Start
 
 ```python
-from bt_api_gateio import GateIOApi
+from bt_api_py import BtApi
 
-# Initialize
-feed = GateIOApi(api_key="your_key", secret="your_secret")
+api = BtApi(exchange_kwargs={
+    "GATEIO___SPOT": {
+        "api_key": "your_api_key",
+        "secret": "your_secret",
+    }
+})
 
-# Get ticker data
-ticker = feed.get_ticker("BTC_USDT")
+ticker = api.get_tick("GATEIO___SPOT", "BTC_USDT")
 print(ticker)
 ```
 
@@ -132,13 +135,16 @@ pip install -e .
 ### 快速开始
 
 ```python
-from bt_api_gateio import GateIOApi
+from bt_api_py import BtApi
 
-# 初始化
-feed = GateIOApi(api_key="your_key", secret="your_secret")
+api = BtApi(exchange_kwargs={
+    "GATEIO___SPOT": {
+        "api_key": "your_api_key",
+        "secret": "your_secret",
+    }
+})
 
-# 获取行情数据
-ticker = feed.get_ticker("BTC_USDT")
+ticker = api.get_tick("GATEIO___SPOT", "BTC_USDT")
 print(ticker)
 ```
 
