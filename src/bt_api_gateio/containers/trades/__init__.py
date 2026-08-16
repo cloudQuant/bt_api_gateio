@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from bt_api_gateio.containers.trades.gateio_trade import (
     GateioRequestTradeData,
     GateioTradeData,

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from bt_api_gateio.containers.orderbooks.gateio_orderbook import (
     GateioOrderBookData,
     GateioRequestOrderBookData,

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -9,6 +10,7 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_int
 
 
 class GateioOrderBookData(OrderBookData):
+    """Class GateioOrderBookData"""
     def __init__(
         self,
         orderbook_info: str | dict,
@@ -16,6 +18,7 @@ class GateioOrderBookData(OrderBookData):
         asset_type: str,
         has_been_json_encoded: bool = False,
     ) -> None:
+        """__init__ method"""
         super().__init__(orderbook_info, has_been_json_encoded)
         self.exchange_name = "GATEIO"
         self.local_update_time = time.time()
@@ -31,6 +34,7 @@ class GateioOrderBookData(OrderBookData):
         self.has_been_init_data = False
 
     def init_data(self) -> GateioOrderBookData:
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.orderbook_data = json.loads(self.order_book_info)
             self.has_been_json_encoded = True
@@ -68,6 +72,7 @@ class GateioOrderBookData(OrderBookData):
         return self
 
     def get_all_data(self) -> dict[str, Any]:
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -91,43 +96,55 @@ class GateioOrderBookData(OrderBookData):
         return self.__str__()
 
     def get_exchange_name(self) -> str:
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self) -> str:
+        """get_asset_type method"""
         return self.asset_type
 
     def get_sequence_id(self) -> int | None:
+        """get_sequence_id method"""
         return self.sequence_id
 
     def get_current_time(self) -> float | None:
+        """get_current_time method"""
         return self.current_time
 
     def get_update_time(self) -> float | None:
+        """get_update_time method"""
         return self.update_time
 
     def get_bids(self) -> list[dict[str, float]] | None:
+        """get_bids method"""
         return self.bids
 
     def get_asks(self) -> list[dict[str, float]] | None:
+        """get_asks method"""
         return self.asks
 
     def get_best_bid(self) -> float | None:
+        """get_best_bid method"""
         if self.bids and len(self.bids) > 0:
             return self.bids[0]["price"]
         return None
 
     def get_best_ask(self) -> float | None:
+        """get_best_ask method"""
         if self.asks and len(self.asks) > 0:
             return self.asks[0]["price"]
         return None
 
     def get_spread(self) -> float | None:
+        """get_spread method"""
         best_bid = self.get_best_bid()
         best_ask = self.get_best_ask()
         if best_bid and best_ask:
@@ -135,18 +152,22 @@ class GateioOrderBookData(OrderBookData):
         return None
 
     def get_bid_depth(self, price_levels: int = 5) -> list[dict[str, float]]:
+        """get_bid_depth method"""
         if self.bids:
             return self.bids[:price_levels]
         return []
 
     def get_ask_depth(self, price_levels: int = 5) -> list[dict[str, float]]:
+        """get_ask_depth method"""
         if self.asks:
             return self.asks[:price_levels]
         return []
 
 
 class GateioRequestOrderBookData(GateioOrderBookData):
+    """Class GateioRequestOrderBookData"""
     def init_data(self) -> GateioRequestOrderBookData:
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.orderbook_data = json.loads(self.order_book_info)
             self.has_been_json_encoded = True
@@ -185,5 +206,7 @@ class GateioRequestOrderBookData(GateioOrderBookData):
 
 
 class GateioWssOrderBookData(GateioOrderBookData):
+    """Class GateioWssOrderBookData"""
     def init_data(self) -> GateioWssOrderBookData:
+        """init_data method"""
         return self

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -8,7 +9,9 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 
 
 class GateioTradeData(TradeData):
+    """Class GateioTradeData"""
     def __init__(self, trade_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(trade_info, has_been_json_encoded)
         self.exchange_name = "GATEIO"
         self.local_update_time = time.time()
@@ -29,6 +32,7 @@ class GateioTradeData(TradeData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.trade_data = json.loads(self.trade_info)
             self.has_been_json_encoded = True
@@ -51,6 +55,7 @@ class GateioTradeData(TradeData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -79,61 +84,80 @@ class GateioTradeData(TradeData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_trade_id(self):
+        """get_trade_id method"""
         return self.trade_id
 
     def get_create_time(self):
+        """get_create_time method"""
         return self.create_time
 
     def get_create_time_ms(self):
+        """get_create_time_ms method"""
         return self.create_time_ms
 
     def get_side(self):
+        """get_side method"""
         return self.side
 
     def get_amount(self):
+        """get_amount method"""
         return self.amount
 
     def get_price(self):
+        """get_price method"""
         return self.price
 
     def get_role(self):
+        """get_role method"""
         return self.role
 
     def get_order_id(self):
+        """get_order_id method"""
         return self.order_id
 
     def get_fee(self):
+        """get_fee method"""
         return self.fee
 
     def get_fee_currency(self):
+        """get_fee_currency method"""
         return self.fee_currency
 
     def get_value(self):
+        """get_value method"""
         if self.amount and self.price:
             return self.amount * self.price
         return 0.0
 
     def is_maker(self):
+        """is_maker method"""
         return self.role == "maker"
 
     def is_taker(self):
+        """is_taker method"""
         return self.role == "taker"
 
 
 class GateioRequestTradeData(GateioTradeData):
+    """Class GateioRequestTradeData"""
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.trade_data = json.loads(self.trade_info)
             self.has_been_json_encoded = True
@@ -157,12 +181,16 @@ class GateioRequestTradeData(GateioTradeData):
 
 
 class GateioWssTradeData(GateioTradeData):
+    """Class GateioWssTradeData"""
     def init_data(self):
+        """init_data method"""
         return self
 
 
 class GateioTradeHistory:
+    """Class GateioTradeHistory"""
     def __init__(self, trade_list, symbol_name, asset_type="SPOT"):
+        """__init__ method"""
         self.exchange_name = "GATEIO"
         self.symbol_name = symbol_name
         self.asset_type = asset_type
@@ -176,21 +204,27 @@ class GateioTradeHistory:
             self.trades.append(trade)
 
     def get_all_trades(self):
+        """get_all_trades method"""
         return [trade.get_all_data() for trade in self.trades]
 
     def get_trades_by_side(self, side):
+        """get_trades_by_side method"""
         return [trade for trade in self.trades if trade.get_side() == side]
 
     def get_maker_trades(self):
+        """get_maker_trades method"""
         return [trade for trade in self.trades if trade.is_maker()]
 
     def get_taker_trades(self):
+        """get_taker_trades method"""
         return [trade for trade in self.trades if trade.is_taker()]
 
     def get_total_volume(self):
+        """get_total_volume method"""
         return sum(trade.get_amount() for trade in self.trades)
 
     def get_average_price(self):
+        """get_average_price method"""
         if not self.trades:
             return 0.0
 
@@ -199,9 +233,11 @@ class GateioTradeHistory:
         return total_value / total_volume if total_volume > 0 else 0.0
 
     def get_total_fees(self):
+        """get_total_fees method"""
         return sum(trade.get_fee() or 0 for trade in self.trades)
 
     def get_trades_by_time_range(self, start_time, end_time):
+        """get_trades_by_time_range method"""
         return [trade for trade in self.trades if start_time <= trade.get_create_time() <= end_time]
 
     def __str__(self):

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -14,7 +15,9 @@ from bt_api_gateio.feeds.live_gateio.request_base import GateioRequestData
 
 
 class GateioRequestDataSpot(GateioRequestData):
+    """Class GateioRequestDataSpot"""
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs["asset_type"] = "spot"
         kwargs.setdefault("logger_name", "gateio_spot_feed.log")
         super().__init__(data_queue, **kwargs)
@@ -58,13 +61,16 @@ class GateioRequestDataSpot(GateioRequestData):
         return [], False
 
     def get_ticker(self, symbol, extra_data=None, **kwargs) -> Any:
+        """get_ticker method"""
         path, params, extra_data = self._get_ticker(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def get_tick(self, symbol, extra_data=None, **kwargs) -> Any:
+        """get_tick method"""
         return self.get_ticker(symbol, extra_data=extra_data, **kwargs)
 
     def async_get_ticker(self, symbol, extra_data=None, **kwargs):
+        """async_get_ticker method"""
         path, params, extra_data = self._get_ticker(symbol, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -72,6 +78,7 @@ class GateioRequestDataSpot(GateioRequestData):
         )
 
     def async_get_tick(self, symbol, extra_data=None, **kwargs):
+        """async_get_tick method"""
         self.async_get_ticker(symbol, extra_data=extra_data, **kwargs)
 
     def _get_depth(self, symbol, limit=20, extra_data=None, **kwargs) -> Any:
@@ -104,10 +111,12 @@ class GateioRequestDataSpot(GateioRequestData):
         return [], False
 
     def get_depth(self, symbol, limit=20, extra_data=None, **kwargs) -> Any:
+        """get_depth method"""
         path, params, extra_data = self._get_depth(symbol, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_depth(self, symbol, limit=20, extra_data=None, **kwargs):
+        """async_get_depth method"""
         path, params, extra_data = self._get_depth(symbol, limit, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -141,10 +150,12 @@ class GateioRequestDataSpot(GateioRequestData):
         return [input_data], True
 
     def get_kline(self, symbol, period="1m", limit=100, extra_data=None, **kwargs) -> Any:
+        """get_kline method"""
         path, params, extra_data = self._get_kline(symbol, period, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_kline(self, symbol, period="1m", limit=100, extra_data=None, **kwargs):
+        """async_get_kline method"""
         path, params, extra_data = self._get_kline(symbol, period, limit, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -152,6 +163,7 @@ class GateioRequestDataSpot(GateioRequestData):
         )
 
     def get_server_time(self, extra_data=None, **kwargs) -> Any:
+        """get_server_time method"""
         request_type = "get_server_time"
         path = self._params.get_rest_path(request_type)
         extra_data = update_extra_data(
@@ -165,6 +177,7 @@ class GateioRequestDataSpot(GateioRequestData):
         return self.request(path, params={}, extra_data=extra_data)
 
     def get_exchange_info(self, symbol=None, extra_data=None, **kwargs) -> Any:
+        """get_exchange_info method"""
         request_type = "get_currency_pairs"
         path = self._params.get_rest_path(request_type)
         params: dict[str, Any] = {}
@@ -208,13 +221,16 @@ class GateioRequestDataSpot(GateioRequestData):
         return [], False
 
     def get_balance(self, extra_data=None, **kwargs) -> Any:
+        """get_balance method"""
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def get_account(self, symbol=None, extra_data=None, **kwargs) -> Any:
+        """get_account method"""
         return self.get_balance(extra_data=extra_data, **kwargs)
 
     def async_get_balance(self, extra_data=None, **kwargs):
+        """async_get_balance method"""
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -291,6 +307,7 @@ class GateioRequestDataSpot(GateioRequestData):
         extra_data=None,
         **kwargs,
     ):
+        """make_order method"""
         path, body, extra_data = self._make_order(
             symbol, vol, price, order_type, client_order_id, extra_data, **kwargs
         )
@@ -306,6 +323,7 @@ class GateioRequestDataSpot(GateioRequestData):
         extra_data=None,
         **kwargs,
     ):
+        """async_make_order method"""
         path, body, extra_data = self._make_order(
             symbol, vol, price, order_type, client_order_id, extra_data, **kwargs
         )
@@ -334,6 +352,7 @@ class GateioRequestDataSpot(GateioRequestData):
         return path, params, body, extra_data
 
     def cancel_order(self, symbol, order_id=None, client_order_id=None, extra_data=None, **kwargs):
+        """cancel_order method"""
         path, params, body, extra_data = self._cancel_order(
             symbol, order_id, client_order_id, extra_data, **kwargs
         )
@@ -378,6 +397,7 @@ class GateioRequestDataSpot(GateioRequestData):
         return [], False
 
     def query_order(self, symbol, order_id=None, client_order_id=None, extra_data=None, **kwargs):
+        """query_order method"""
         path, params, extra_data = self._query_order(
             symbol, order_id, client_order_id, extra_data, **kwargs
         )
@@ -400,13 +420,16 @@ class GateioRequestDataSpot(GateioRequestData):
         return path, params, extra_data
 
     def get_deals(self, symbol=None, limit=100, extra_data=None, **kwargs) -> Any:
+        """get_deals method"""
         path, params, extra_data = self._get_deals(symbol, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
 
 class GateioMarketWssDataSpot:
+    """Class GateioMarketWssDataSpot"""
     pass
 
 
 class GateioAccountWssDataSpot:
+    """Class GateioAccountWssDataSpot"""
     pass

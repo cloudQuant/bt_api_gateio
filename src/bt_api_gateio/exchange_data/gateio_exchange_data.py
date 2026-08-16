@@ -1,3 +1,4 @@
+"""Module documentation"""
 from __future__ import annotations
 
 import json
@@ -34,7 +35,9 @@ def _get_gateio_config() -> Any | None:
 
 
 class GateioExchangeData(ExchangeData):
+    """Class GateioExchangeData"""
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "gateio"
         self.rest_url = ""
@@ -114,18 +117,23 @@ class GateioExchangeData(ExchangeData):
         return True
 
     def get_symbol(self, symbol: str) -> str:
+        """get_symbol method"""
         return symbol.replace("-", "_")
 
     def get_rest_path(self, key: str, **kwargs) -> str:
+        """get_rest_path method"""
         return self.rest_paths.get(key, "")
 
     def get_wss_path(self, **kwargs) -> str:
+        """get_wss_path method"""
         return json.dumps({})
 
     def get_period(self, period: str) -> str:
+        """get_period method"""
         return self.kline_periods.get(period, period)
 
     def account_wss_symbol(self, symbol: str) -> str:
+        """account_wss_symbol method"""
         for lc in self.legal_currency:
             if lc in symbol:
                 symbol = f"{symbol.split(lc)[0]}_{lc}".lower()
@@ -134,14 +142,18 @@ class GateioExchangeData(ExchangeData):
 
 
 class GateioExchangeDataSpot(GateioExchangeData):
+    """Class GateioExchangeDataSpot"""
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.asset_type = "spot"
         self._load_from_config("spot")
 
 
 class GateioExchangeDataSwap(GateioExchangeData):
+    """Class GateioExchangeDataSwap"""
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.asset_type = "swap"
         self._load_from_config("futures")

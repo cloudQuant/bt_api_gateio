@@ -42,6 +42,7 @@ class GateioRequestData(Feed, RequestData):
         }
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.public_key = kwargs.get("public_key") or kwargs.get("api_key")
         self.private_key = (
@@ -100,14 +101,12 @@ class GateioRequestData(Feed, RequestData):
     def request(self, path, params=None, body=None, extra_data=None, timeout=10):
         """Synchronous HTTP request following the framework pattern.
 
-        Args:
-            path: Request path in format "METHOD /endpoint" (e.g. "GET /spot/tickers")
+        Args: path: Request path in format "METHOD /endpoint" (e.g. "GET /spot/tickers")
             params: Query parameters for GET requests
             body: Request body for POST/PUT/DELETE
             extra_data: Extra data dict for response normalization
             timeout: Request timeout in seconds
-        Returns:
-            RequestData wrapping the response
+        Returns: RequestData wrapping the response
         """
         if params is None:
             params: dict[str, Any] = {}

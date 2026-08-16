@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -10,7 +11,9 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 
 
 class GateioTickerData(TickerData):
+    """Class GateioTickerData"""
     def __init__(self, ticker_info, symbol_name, asset_type, has_been_json_encoded=False) -> None:
+        """__init__ method"""
         super().__init__(ticker_info, has_been_json_encoded)
         self.exchange_name = "GATEIO"
         self.local_update_time = time.time()
@@ -34,6 +37,7 @@ class GateioTickerData(TickerData):
         self.has_been_init_data = False
 
     def init_data(self) -> Self:
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.ticker_data = json.loads(self.ticker_info)
             self.has_been_json_encoded = True
@@ -59,6 +63,7 @@ class GateioTickerData(TickerData):
         return self
 
     def get_all_data(self) -> dict[str, Any]:
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -89,53 +94,70 @@ class GateioTickerData(TickerData):
         return self.__str__()
 
     def get_exchange_name(self) -> str:
+        """get_exchange_name method"""
         return str(self.exchange_name)
 
     def get_local_update_time(self) -> float:
+        """get_local_update_time method"""
         return float(self.local_update_time)
 
     def get_symbol_name(self) -> str:
+        """get_symbol_name method"""
         return str(self.symbol_name)
 
     def get_ticker_symbol_name(self) -> str | None:
+        """get_ticker_symbol_name method"""
         return self.ticker_symbol_name
 
     def get_asset_type(self) -> str:
+        """get_asset_type method"""
         return str(self.asset_type)
 
     def get_server_time(self) -> float | None:
+        """get_server_time method"""
         return self.server_time
 
     def get_last_price(self) -> float | None:
+        """get_last_price method"""
         return self.last_price
 
     def get_high_24h(self) -> float | None:
+        """get_high_24h method"""
         return self.high_24h
 
     def get_low_24h(self) -> float | None:
+        """get_low_24h method"""
         return self.low_24h
 
     def get_volume_24h(self) -> float | None:
+        """get_volume_24h method"""
         return self.volume_24h
 
     def get_price_change_percentage(self):
+        """get_price_change_percentage method"""
         return self.price_change_percentage
 
     def get_bid_price(self) -> float | None:
+        """get_bid_price method"""
         return self.bid_price
 
     def get_ask_price(self) -> float | None:
+        """get_ask_price method"""
         return self.ask_price
 
     def get_base_volume(self):
+        """get_base_volume method"""
         return self.base_volume
 
     def get_quote_volume(self):
+        """get_quote_volume method"""
         return self.quote_volume
 
 
 class GateioRequestTickerData(GateioTickerData):
+    """Class GateioRequestTickerData"""
     def init_data(self) -> Self:
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.ticker_data = json.loads(self.ticker_info)
             self.has_been_json_encoded = True
@@ -161,5 +183,7 @@ class GateioRequestTickerData(GateioTickerData):
 
 
 class GateioWssTickerData(GateioTickerData):
+    """Class GateioWssTickerData"""
     def init_data(self) -> Self:
+        """init_data method"""
         return self

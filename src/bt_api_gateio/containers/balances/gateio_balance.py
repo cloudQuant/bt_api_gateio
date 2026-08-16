@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -8,7 +9,9 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 
 
 class GateioBalanceData(BalanceData):
+    """Class GateioBalanceData"""
     def __init__(self, balance_info, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(balance_info, has_been_json_encoded)
         self.exchange_name = "GATEIO"
         self.local_update_time = time.time()
@@ -21,6 +24,7 @@ class GateioBalanceData(BalanceData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.balance_data = json.loads(self.balance_info)
             self.has_been_json_encoded = True
@@ -36,6 +40,7 @@ class GateioBalanceData(BalanceData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -57,34 +62,44 @@ class GateioBalanceData(BalanceData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_currency(self):
+        """get_currency method"""
         return self.currency
 
     def get_available(self):
+        """get_available method"""
         return self.available
 
     def get_locked(self):
+        """get_locked method"""
         return self.locked
 
     def get_total(self):
+        """get_total method"""
         if self.available and self.locked:
             return self.available + self.locked
         return 0.0
 
     def is_zero_balance(self):
+        """is_zero_balance method"""
         return not (self.available and self.available > 0) and not (self.locked and self.locked > 0)
 
 
 class GateioRequestBalanceData(GateioBalanceData):
+    """Class GateioRequestBalanceData"""
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.balance_data = json.loads(self.balance_info)
             self.has_been_json_encoded = True
@@ -101,12 +116,16 @@ class GateioRequestBalanceData(GateioBalanceData):
 
 
 class GateioWssBalanceData(GateioBalanceData):
+    """Class GateioWssBalanceData"""
     def init_data(self):
+        """init_data method"""
         return self
 
 
 class GateioAccountBalance:
+    """Class GateioAccountBalance"""
     def __init__(self, balance_list, asset_type="SPOT"):
+        """__init__ method"""
         self.exchange_name = "GATEIO"
         self.asset_type = asset_type
         self.local_update_time = time.time()
@@ -119,18 +138,22 @@ class GateioAccountBalance:
             self.balances.append(balance)
 
     def get_all_balances(self):
+        """get_all_balances method"""
         return [balance.get_all_data() for balance in self.balances]
 
     def get_balance(self, currency):
+        """get_balance method"""
         for balance in self.balances:
             if balance.get_currency() == currency:
                 return balance.get_all_data()
         return None
 
     def get_nonzero_balances(self):
+        """get_nonzero_balances method"""
         return [balance for balance in self.balances if not balance.is_zero_balance()]
 
     def get_total_value(self, prices=None):
+        """get_total_value method"""
         total_value = 0.0
         for balance in self.get_nonzero_balances():
             available = balance.get_available()

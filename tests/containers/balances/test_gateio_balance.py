@@ -76,6 +76,7 @@ class TestGateioBalanceData:
         assert result["currency"] == "USDT"
 
     def test_init_data_from_json_string(self):
+        """test_init_data_from_json_string method"""
         payload = json.dumps({"currency": "BTC", "available": "1.5", "locked": "0.2"})
         balance = GateioBalanceData(payload, asset_type="SPOT")
         balance.init_data()
@@ -84,6 +85,7 @@ class TestGateioBalanceData:
         assert balance.get_total() == 1.7
 
     def test_non_zero_balance_detection(self):
+        """test_non_zero_balance_detection method"""
         data = {"currency": "USDT", "available": "2.0", "locked": "0.0"}
         balance = GateioBalanceData(data, asset_type="SPOT", has_been_json_encoded=True)
         balance.init_data()
@@ -102,6 +104,7 @@ class TestGateioRequestBalanceData:
         assert balance.asset_type == "SPOT"
 
     def test_request_balance_init_data(self):
+        """test_request_balance_init_data method"""
         balance = GateioRequestBalanceData(
             {"currency": "ETH", "available": "5.0", "locked": "1.0"},
             asset_type="SPOT",
@@ -114,7 +117,9 @@ class TestGateioRequestBalanceData:
 
 
 class TestGateioWssBalanceData:
+    """Class TestGateioWssBalanceData"""
     def test_wss_init_returns_self_without_parsing(self):
+        """test_wss_init_returns_self_without_parsing method"""
         balance = GateioWssBalanceData(
             {"currency": "BTC"},
             asset_type="SPOT",
@@ -125,7 +130,9 @@ class TestGateioWssBalanceData:
 
 
 class TestGateioAccountBalance:
+    """Class TestGateioAccountBalance"""
     def test_account_balance_helpers(self):
+        """test_account_balance_helpers method"""
         account = GateioAccountBalance(
             [
                 {"currency": "USDT", "available": "100", "locked": "0"},
@@ -141,5 +148,6 @@ class TestGateioAccountBalance:
         assert account.get_total_value({"BTC": 50000.0, "USDT": 1.0}) == 75100.0
 
     def test_account_balance_missing_currency_returns_none(self):
+        """test_account_balance_missing_currency_returns_none method"""
         account = GateioAccountBalance([], asset_type="SPOT")
         assert account.get_balance("ETH") is None

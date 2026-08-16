@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -14,7 +15,9 @@ from bt_api_gateio.feeds.live_gateio.request_base import GateioRequestData
 
 
 class GateioRequestDataSwap(GateioRequestData):
+    """Class GateioRequestDataSwap"""
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs["asset_type"] = "swap"
         kwargs.setdefault("logger_name", "gateio_swap_feed.log")
         super().__init__(data_queue, **kwargs)
@@ -57,13 +60,16 @@ class GateioRequestDataSwap(GateioRequestData):
         return [], False
 
     def get_ticker(self, symbol, extra_data=None, **kwargs) -> Any:
+        """get_ticker method"""
         path, params, extra_data = self._get_ticker(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def get_tick(self, symbol, extra_data=None, **kwargs) -> Any:
+        """get_tick method"""
         return self.get_ticker(symbol, extra_data=extra_data, **kwargs)
 
     def async_get_ticker(self, symbol, extra_data=None, **kwargs):
+        """async_get_ticker method"""
         path, params, extra_data = self._get_ticker(symbol, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -100,10 +106,12 @@ class GateioRequestDataSwap(GateioRequestData):
         return [], False
 
     def get_depth(self, symbol, limit=20, extra_data=None, **kwargs) -> Any:
+        """get_depth method"""
         path, params, extra_data = self._get_depth(symbol, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_depth(self, symbol, limit=20, extra_data=None, **kwargs):
+        """async_get_depth method"""
         path, params, extra_data = self._get_depth(symbol, limit, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -137,10 +145,12 @@ class GateioRequestDataSwap(GateioRequestData):
         return [input_data], True
 
     def get_kline(self, symbol, period="1m", limit=100, extra_data=None, **kwargs) -> Any:
+        """get_kline method"""
         path, params, extra_data = self._get_kline(symbol, period, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_kline(self, symbol, period="1m", limit=100, extra_data=None, **kwargs):
+        """async_get_kline method"""
         path, params, extra_data = self._get_kline(symbol, period, limit, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -176,10 +186,12 @@ class GateioRequestDataSwap(GateioRequestData):
         return [], False
 
     def get_balance(self, extra_data=None, **kwargs) -> Any:
+        """get_balance method"""
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_balance(self, extra_data=None, **kwargs):
+        """async_get_balance method"""
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -257,6 +269,7 @@ class GateioRequestDataSwap(GateioRequestData):
         extra_data=None,
         **kwargs,
     ):
+        """make_order method"""
         path, body, extra_data = self._make_order(
             symbol, vol, price, order_type, client_order_id, extra_data, **kwargs
         )
@@ -272,6 +285,7 @@ class GateioRequestDataSwap(GateioRequestData):
         extra_data=None,
         **kwargs,
     ):
+        """async_make_order method"""
         path, body, extra_data = self._make_order(
             symbol, vol, price, order_type, client_order_id, extra_data, **kwargs
         )
@@ -299,6 +313,7 @@ class GateioRequestDataSwap(GateioRequestData):
         return path, params, body, extra_data
 
     def cancel_order(self, symbol, order_id=None, client_order_id=None, extra_data=None, **kwargs):
+        """cancel_order method"""
         path, params, body, extra_data = self._cancel_order(
             symbol, order_id, client_order_id, extra_data, **kwargs
         )
@@ -341,6 +356,7 @@ class GateioRequestDataSwap(GateioRequestData):
         return [], False
 
     def query_order(self, symbol, order_id=None, client_order_id=None, extra_data=None, **kwargs):
+        """query_order method"""
         path, params, extra_data = self._query_order(
             symbol, order_id, client_order_id, extra_data, **kwargs
         )
@@ -363,13 +379,16 @@ class GateioRequestDataSwap(GateioRequestData):
         return path, params, extra_data
 
     def get_deals(self, symbol=None, limit=100, extra_data=None, **kwargs) -> Any:
+        """get_deals method"""
         path, params, extra_data = self._get_deals(symbol, limit, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
 
 class GateioMarketWssDataSwap:
+    """Class GateioMarketWssDataSwap"""
     pass
 
 
 class GateioAccountWssDataSwap:
+    """Class GateioAccountWssDataSwap"""
     pass

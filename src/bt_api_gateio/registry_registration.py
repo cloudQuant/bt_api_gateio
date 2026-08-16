@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -28,6 +29,7 @@ def _gateio_swap_subscribe_handler(
 
 
 def register_gateio(registry: type[ExchangeRegistry]) -> None:
+    """register_gateio function"""
     registry.register_feed("GATEIO___SPOT", GateioRequestDataSpot)
     registry.register_exchange_data("GATEIO___SPOT", GateioExchangeDataSpot)
     registry.register_balance_handler("GATEIO___SPOT", _gateio_balance_handler)

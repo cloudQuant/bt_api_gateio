@@ -1,9 +1,11 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from bt_api_base.error import ErrorCategory, ErrorTranslator, UnifiedError, UnifiedErrorCode
 
 
 class GateioErrorTranslator(ErrorTranslator):
+    """Class GateioErrorTranslator"""
     ERROR_MAP = {
         "INVALIDPARAM": (UnifiedErrorCode.INVALID_PARAMETER, "Invalid parameter"),
         "PARAMETER_ERROR": (UnifiedErrorCode.INVALID_PARAMETER, "Parameter error"),
@@ -28,6 +30,7 @@ class GateioErrorTranslator(ErrorTranslator):
 
     @classmethod
     def translate(cls, raw_error, venue: str = "GATEIO"):
+        """translate method"""
         if isinstance(raw_error, str):
             return cls.translate_string_error(raw_error, venue)
         elif isinstance(raw_error, dict):
@@ -36,6 +39,7 @@ class GateioErrorTranslator(ErrorTranslator):
 
     @classmethod
     def translate_string_error(cls, error_msg: str, venue: str):
+        """translate_string_error method"""
         error_lower = error_msg.lower()
 
         if "invalid api key" in error_lower or "auth_key" in error_lower:
@@ -73,6 +77,7 @@ class GateioErrorTranslator(ErrorTranslator):
 
     @classmethod
     def translate_dict_error(cls, error_dict: dict, venue: str):
+        """translate_dict_error method"""
         label = error_dict.get("label", "")
         message = error_dict.get("message", "")
 

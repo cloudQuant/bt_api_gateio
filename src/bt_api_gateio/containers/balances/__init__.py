@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from bt_api_gateio.containers.balances.gateio_balance import (
     GateioAccountBalance,
     GateioBalanceData,

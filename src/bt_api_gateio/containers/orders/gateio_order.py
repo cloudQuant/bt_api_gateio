@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -8,7 +9,9 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 
 
 class GateioOrderData(OrderData):
+    """Class GateioOrderData"""
     def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
         self.exchange_name = "GATEIO"
         self.local_update_time = time.time()
@@ -34,6 +37,7 @@ class GateioOrderData(OrderData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.order_data = json.loads(self.order_info)
             self.has_been_json_encoded = True
@@ -61,6 +65,7 @@ class GateioOrderData(OrderData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -94,65 +99,86 @@ class GateioOrderData(OrderData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_order_id(self):
+        """get_order_id method"""
         return self.order_id
 
     def get_status(self):
+        """get_status method"""
         return self.status
 
     def get_side(self):
+        """get_side method"""
         return self.side
 
     def get_type(self):
+        """get_type method"""
         return self.type
 
     def get_price(self):
+        """get_price method"""
         return self.price
 
     def get_amount(self):
+        """get_amount method"""
         return self.amount
 
     def get_filled_amount(self):
+        """get_filled_amount method"""
         return self.filled_amount
 
     def get_remaining_amount(self):
+        """get_remaining_amount method"""
         return self.remaining_amount
 
     def get_create_time(self):
+        """get_create_time method"""
         return self.create_time
 
     def get_update_time(self):
+        """get_update_time method"""
         return self.update_time
 
     def get_text(self):
+        """get_text method"""
         return self.text
 
     def get_account(self):
+        """get_account method"""
         return self.account
 
     def get_time_in_force(self):
+        """get_time_in_force method"""
         return self.time_in_force
 
     def get_fee(self):
+        """get_fee method"""
         return self.fee
 
     def get_fee_currency(self):
+        """get_fee_currency method"""
         return self.fee_currency
 
 
 class GateioRequestOrderData(GateioOrderData):
+    """Class GateioRequestOrderData"""
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.order_data = json.loads(self.order_info)
             self.has_been_json_encoded = True
@@ -181,5 +207,7 @@ class GateioRequestOrderData(GateioOrderData):
 
 
 class GateioWssOrderData(GateioOrderData):
+    """Class GateioWssOrderData"""
     def init_data(self):
+        """init_data method"""
         return self

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from bt_api_gateio.containers.tickers.gateio_ticker import (
     GateioRequestTickerData,
     GateioTickerData,
