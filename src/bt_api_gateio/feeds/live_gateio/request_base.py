@@ -18,6 +18,7 @@ from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule
 
+from bt_api_gateio.errors.gateio_translator import GateioErrorTranslator
 from bt_api_gateio.exchange_data.gateio_exchange_data import GateioExchangeDataSpot
 
 
@@ -55,6 +56,21 @@ class GateioRequestData(Feed, RequestData):
         self.request_logger = get_logger("request")
         self.async_logger = get_logger("async_request")
         self._rate_limiter = kwargs.get("rate_limiter", self._create_default_rate_limiter())
+        self._error_translator = GateioErrorTranslator()
+
+    def translate_error(self, raw_response: Any) -> Any:
+        """Gate.io API 错误响应(label 非空)翻译为 UnifiedError，否则返回 None。"""
+        if isinstance(raw_response, dict):
+            label = raw_response.get("label")
+            if label:
+                return self._error_translator.translate(raw_response, self.exchange_name)
+        return None
+
+    def _raise_if_error(self, raw_response: Any) -> None:
+        """API 响应含错误(label 非空)时抛出翻译后的 UnifiedError。"""
+        error = self.translate_error(raw_response)
+        if error is not None:
+            raise error
 
     @staticmethod
     def _create_default_rate_limiter():
@@ -146,6 +162,7 @@ class GateioRequestData(Feed, RequestData):
             body=body if method in ("POST", "PUT", "DELETE") else None,
             timeout=timeout,
         )
+        self._raise_if_error(response_data)
 
         request_data = RequestData(response_data, extra_data if extra_data else {})
         request_data.init_data()
@@ -185,6 +202,7 @@ class GateioRequestData(Feed, RequestData):
             body=body if method in ("POST", "PUT", "DELETE") else None,
             timeout=timeout,
         )
+        self._raise_if_error(response_data)
 
         return RequestData(response_data, extra_data if extra_data else {})
 
