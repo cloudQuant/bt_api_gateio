@@ -53,8 +53,8 @@ class GateioRequestData(Feed, RequestData):
         self.exchange_name = "GATEIO"
         self.logger_name = kwargs.get("logger_name", "gateio_feed.log")
         self._params = GateioExchangeDataSpot()
-        self.request_logger = get_logger("request")
-        self.async_logger = get_logger("async_request")
+        self.request_logger = get_logger("gateio_feed")
+        self.async_logger = get_logger("gateio_async_feed")
         self._rate_limiter = kwargs.get("rate_limiter", self._create_default_rate_limiter())
         self._error_translator = GateioErrorTranslator()
 

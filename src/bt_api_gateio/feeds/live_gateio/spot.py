@@ -22,8 +22,8 @@ class GateioRequestDataSpot(GateioRequestData):
         kwargs.setdefault("logger_name", "gateio_spot_feed.log")
         super().__init__(data_queue, **kwargs)
         self._params = GateioExchangeDataSpot()
-        self.request_logger = get_logger("request")
-        self.async_logger = get_logger("async_request")
+        self.request_logger = get_logger("gateio_feed")
+        self.async_logger = get_logger("gateio_async_feed")
 
     def _get_ticker(self, symbol, extra_data=None, **kwargs) -> Any:
         request_symbol = self._params.get_symbol(symbol)
