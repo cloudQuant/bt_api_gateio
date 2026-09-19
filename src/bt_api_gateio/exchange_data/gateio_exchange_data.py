@@ -43,8 +43,8 @@ class GateioExchangeData(ExchangeData):
         self.rest_url = ""
         self.acct_wss_url = ""
         self.wss_url = ""
-        self.rest_paths = {}
-        self.wss_paths = {}
+        self.rest_paths: dict[str, str] = {}
+        self.wss_paths: dict[str, str] = {}
 
         self.kline_periods = {
             "1s": "10s",

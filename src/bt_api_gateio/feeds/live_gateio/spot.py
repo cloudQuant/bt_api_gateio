@@ -339,7 +339,7 @@ class GateioRequestDataSpot(GateioRequestData):
         request_type = "cancel_order"
         path = self._params.get_rest_path(request_type)
         params = {"currency_pair": request_symbol}
-        body = {}
+        body: dict[str, Any] = {}
         extra_data = update_extra_data(
             extra_data,
             request_type=request_type,
@@ -427,9 +427,7 @@ class GateioRequestDataSpot(GateioRequestData):
 
 class GateioMarketWssDataSpot:
     """Class GateioMarketWssDataSpot"""
-    pass
 
 
 class GateioAccountWssDataSpot:
     """Class GateioAccountWssDataSpot"""
-    pass

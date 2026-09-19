@@ -300,7 +300,7 @@ class GateioRequestDataSwap(GateioRequestData):
         request_type = "cancel_order"
         path = self._params.get_rest_path(request_type)
         params: dict[str, Any] = {}
-        body = {}
+        body: dict[str, Any] = {}
         extra_data = update_extra_data(
             extra_data,
             request_type=request_type,
@@ -386,9 +386,7 @@ class GateioRequestDataSwap(GateioRequestData):
 
 class GateioMarketWssDataSwap:
     """Class GateioMarketWssDataSwap"""
-    pass
 
 
 class GateioAccountWssDataSwap:
     """Class GateioAccountWssDataSwap"""
-    pass

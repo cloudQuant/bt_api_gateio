@@ -1,5 +1,4 @@
 """Module-level docstring."""
-import base64
 from bt_api_gateio.feeds.live_gateio.request_base import GateioRequestData
 def test_gateio_accepts_api_key_and_api_secret_aliases() -> None:
     """test_gateio_accepts_api_key_and_api_secret_aliases function"""
