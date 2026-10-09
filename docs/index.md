@@ -1,4 +1,4 @@
-# Gate.io Documentation
+﻿# Gate.io Documentation
 
 ## English
 

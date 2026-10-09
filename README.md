@@ -1,4 +1,4 @@
-# Gate.io
+﻿# Gate.io
 
 Gate.io exchange plugin for bt_api, supporting Spot and Futures trading.
 
