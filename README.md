@@ -19,7 +19,7 @@ This package provides **Gate.io exchange plugin for bt_api** for the [bt_api](ht
 ### Features
 
 - Spot and futures trading
-- REST and WebSocket APIs
+- REST requests; current subscriptions only log topics and do not start WebSocket consumers
 - Order book depth data
 - Trade history
 - Balance management
@@ -113,7 +113,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ### 功能特点
 
 - 现货和期货交易
-- REST 和 WebSocket API
+- REST 请求；当前订阅只记录 topic，不会启动 WebSocket 消费者
 - 订单簿深度数据
 - 交易历史
 - 余额管理
