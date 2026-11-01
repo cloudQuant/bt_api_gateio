@@ -23,6 +23,10 @@ GATEIO___SWAP = "bt_api_base.order_identity_projection:project_legacy_order_iden
 GATEIO___SPOT = "bt_api_base.order_request_projection:legacy_order_request_projection"
 GATEIO___SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
 
+[project.entry-points."bt_api.order_quantity_unit_validators"]
+GATEIO___SPOT = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+GATEIO___SWAP = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
