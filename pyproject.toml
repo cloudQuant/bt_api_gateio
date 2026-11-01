@@ -19,6 +19,10 @@ gateio = "bt_api_gateio.plugin:register_plugin"
 GATEIO___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 GATEIO___SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 
+[project.entry-points."bt_api.order_request_projections"]
+GATEIO___SPOT = "bt_api_base.order_request_projection:legacy_order_request_projection"
+GATEIO___SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
